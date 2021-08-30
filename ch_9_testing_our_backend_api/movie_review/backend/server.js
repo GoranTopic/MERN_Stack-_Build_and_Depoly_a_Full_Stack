@@ -7,7 +7,7 @@ app.use(cors()); // use the middleware cors
 app.use(express.json()); // use json middleware
 
 // define movies route
-app.use('api/v1/movies', movies);
+app.use('/api/v1/movies', movies);
 
 app.use('*', (req,res) => { 
 		// define a global route thath catches any get requests

@@ -5,7 +5,8 @@ export default class MovieDAO{
 				if(movies){ return } 
 				try{
 						// get the name space, or the name of the db from the env var
-						const ns = process.env.MOVIEREVIEW_NS;
+						const ns = process.env.MOVIE_REVIEW_NS;
+						console.log(ns)
 						// with the connection passed, ns on the collection movies
 						movies = await conn.db( ns ).collection('movies');
 				}catch(e){
@@ -23,18 +24,20 @@ export default class MovieDAO{
 						if("title" in filters){ // if filter has own property title
 								query = { $text: { $search: filters['title'] } };
 						}else if("rated" in filters){ // if  filter has a rated property 
-								query = { "rated": { $eq: filter['rated']} };
+								query = { "rated": { $eq: filters['rated']} };
 						}
 				}
 				let cursor;
 				try{
 						// save a page of the queried objecst in the cursor 
+						console.log(query);
 						cursor = await movies.find(query).limit(moviesPerPage).skip(moviesPerPage * page); 
+						
 						const moviesList = await cursor.toArray(); // make queried objs into an array
 						const totalNumMovies = await movies.countDocuments(query); // query the db for number of documents
 						return { moviesList, totalNumMovies };
 				} catch(e){
-						console.error('Unable to issur find command, ${e}');
+						console.error(`Unable to issue find command, ${e}`);
 						return { moviesList: [], totalNumMovies: 0 };
 				}
 		}

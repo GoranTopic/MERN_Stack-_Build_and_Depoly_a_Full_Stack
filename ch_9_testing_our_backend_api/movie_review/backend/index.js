@@ -9,14 +9,15 @@ async function main(){
 
 		dotenv.config(); // load the dot env variables 
 
+		// connect to database
 		const port = process.env.PORT || 8000;
 		const url = process.env.MOVIE_REVIEW_DB_URL;
 		const client  = new mongodb.MongoClient( url );
 
 		try {
 				await client.connect();	
-				await MoviesDAO.injectDB(client);
-				app.listen(port, () =>{
+				await MoviesDAO.injectDB(client); // connect to db
+				app.listen(port, () => { // run app 
 						console.log('server is running on port: ' + port);
 				});
 		} catch (e){

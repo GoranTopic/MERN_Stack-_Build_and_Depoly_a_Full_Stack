@@ -14,9 +14,9 @@ export default class MoviesController{
 				// parse additional filters
 				let filters = {};
 				if(req.query.rated){ // if rated is provided
-						filter.rated = req.query.rated; // use the rate passed
+						filters.rated = req.query.rated; // use the rate passed
 				}else if(req.query.title){ // if title is provide  
-						filter.title = req.query.title; // use the title passed
+						filters.title = req.query.title; // use the title passed
 				}
 				// call the Movies DAO which queries the db 
 				const { moviesList, totalNumMovies } = await MoviesDAO.getMovies({filters, page, moviesPerPage})
