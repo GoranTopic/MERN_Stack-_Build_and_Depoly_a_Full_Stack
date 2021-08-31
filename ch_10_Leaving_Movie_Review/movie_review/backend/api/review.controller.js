@@ -7,12 +7,12 @@ export default class ReviewsController{
 				/* method for creating and posting a review */
 				try{
 						// get movie id from req
-						console.log(req.body)
-						console.log(req);
+						//console.log(req.body)
+						//console.log(req);
 						const movieId = req.body.movie_id; 
-						console.log(movieId);
+						//console.log(movieId);
 						const review = req.body.review; // get review body 
-						console.log(review);
+						//console.log(review);
 						const userInfo = { // get userInfo
 								name: req.body.name,
 								_id: req.body.user_id
@@ -41,7 +41,7 @@ export default class ReviewsController{
 						const date = new Date(); // get the current date
 						// add a movie review to the databse
 						
-						const ReviewResponse = await ReviewsDAO.addReview(
+						const ReviewResponse = await ReviewsDAO.updateReview(
 								reviewId,
 								req.body.user_id,
 								review,
