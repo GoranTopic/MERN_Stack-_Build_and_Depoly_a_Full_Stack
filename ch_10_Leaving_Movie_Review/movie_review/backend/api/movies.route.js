@@ -8,7 +8,13 @@ import ReviewsController from './review.controller.js';
 const router = express.Router() // get access to exporess router?
 
 // pass the controller to any url 
-router.route('/').get(Moviescontroller.apiGetMovies);
+router.route("/").get(Moviescontroller.apiGetMovies);
+
+// rout to return individual movie
+router.route("/id/:id").get(Moviescontroller.apiGetMovieById);
+
+// route to return ratings 
+router.route("/ratings").get(Moviescontroller.apiGetRatings);
 
 // route for posting review
 router.route("/review") // route for review CRUD

@@ -1,3 +1,6 @@
+import mongodb from "mongodb";
+const ObjectId = mongodb.ObjectId;
+
 let movies;
 
 export default class MovieDAO{
@@ -41,4 +44,38 @@ export default class MovieDAO{
 						return { moviesList: [], totalNumMovies: 0 };
 				}
 		}
+
+		static async getMovieById(id){
+				try{
+						return await movies.aggregate([
+								{
+										$match: { // run a query that matches the object id
+												_id: new ObjectId(id),
+										}
+								},{ 
+										$lookup:{ 
+												from: 'reviews',
+												localField: '_id',
+												foreignField: 'movie_id',
+												as: 'reviews',
+										} 
+								}
+						]).next()
+				}catch(e){
+						console.error(`something went worng in getMovieById, MovieDAO: ${e}`);
+						throw e;
+				}
+		}
+
+		static async getRatings(){
+				let ratings = [];
+				try{
+						ratings = await movies.distinct("rated");
+						return ratings;
+				}catch(e){
+						console.error(`unable to get ratings: ${e}`);
+						return ratings;
+				}
+		}
+
 }
