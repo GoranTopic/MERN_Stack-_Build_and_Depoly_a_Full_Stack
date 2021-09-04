@@ -1,28 +1,28 @@
 import axios from "axios";
 
-class MovieDataService{
+class MovieDataService {
 
-		getAll(page = 0){
+		static getAll(page = 0){
 				return axios.get(`http://localhost:5000/api/v1/movies?pagge=${page}`);
 		}
 
-		get(id){
+		static get(id){
 				return axios.get(`http://localhost:5000/api/v1/movies/id/${id}`);
 		}
 
-		find(query, by = "title", page = 0){
+		static find(query, by = "title", page = 0){
 				return axios.get( `http://localhost:5000/api/v1/movies?${by}=${query}&page=${page}`);
 		}
 
-		createReview(data){
+		static createReview(data){
 				return axios.post("http://localhost:5000/api/v1/movies/review", data);
 		}
 
-		updateReview(data){	
+		static updateReview(data){	
 				return axios.put("http://localhost:5000/api/v1/movies/review", data);
 		}
 
-		deleteReview(id, userId){
+		static deleteReview(id, userId){
 				return axios.delete("http://localhost:5000/api/v1/movies/review", 
 						{ date: {
 								review_id: id, 
@@ -31,8 +31,8 @@ class MovieDataService{
 				);
 		}
 
-		getRatings(){
-				return axios.get("http://localhost:5000/api/vq/movies/ratings");
+		static getRatings(){
+				return axios.get("http://localhost:5000/api/v1/movies/ratings");
 		}
 
 }

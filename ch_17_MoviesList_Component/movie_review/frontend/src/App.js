@@ -35,13 +35,13 @@ function App() {
 								</Navbar.Brand>
 								<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 								<Navbar.Collapse id="basic-navbar-nav">
-										<Nav classname="mr-auto">
+										<Nav className="mr-auto">
 												<Nav.Link>
 														<Link to={"/movies"}>Movies</Link>
 												</Nav.Link>
 												<Nav.Link>
 														{ user ?
-																		( <a href="#" onClick={logout}> Logout user</a> ):
+																		( <a href="http://localhost:3000/" onClick={logout}> Logout user</a> ):
 																		( <Link to={"/login"}>Login</Link> ) }
 												</Nav.Link>
 										</Nav>
