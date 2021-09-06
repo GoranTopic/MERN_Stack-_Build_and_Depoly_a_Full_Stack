@@ -42,24 +42,25 @@ const Movie = props => {
 												{moment(review.date).format("Do MMMM YYYY")}
 										</h5>
 										<p> {review.review} </p>
-										{ props.user && props.user.id === review.user_id && 
-										<Row> 
-												<Col> 
-														<Link to={{ 
-																pathname:"/movies/" + props.match.params.id + "/review", 
-																state: {
-																		currentReview: review
-																} 
-														}}>
-																Edit
-														</Link>
-												</Col>
-												<Col>
-														<Button variant="link">
-																Delete
-														</Button>
-												</Col>
-										</Row> 
+										{ props.user && 
+														props.user.id === review.user_id && 
+														<Row> 
+																<Col> 
+																		<Link to={{ 
+																				pathname:"/movies/" + props.match.params.id + "/review", 
+																				state: {
+																						currentReview: review
+																				} 
+																		}}>
+																				Edit
+																		</Link>
+																</Col>
+																<Col>
+																		<Button variant="link">
+																				Delete
+																		</Button>
+																</Col>
+														</Row> 
 										}
 								</Media.Body>
 						</Media>
@@ -81,8 +82,8 @@ const Movie = props => {
 														<Card.Body>
 																<Card.Text>
 																</Card.Text>
-																{props.user && <Link 
-																		to={"/movies/" + props.match.params.id +"review" }> 
+																{ props.user && <Link 
+																		to={"/movies/" + props.match.params.id +"/review" }> 
 																		Add Review
 																</Link> }
 														</Card.Body>
